@@ -94,6 +94,15 @@ public class ListExample {
          
          Iterator<Integer> iterator = ar3.iterator();
          
+         
+         while(iterator.hasNext()) {
+        	 
+        	 Integer next = iterator.next();
+        	 if(iterator.next() ==23 | iterator.next() ==23) {
+        		 System.out.println("test comp");
+        	 }
+         }
+         
          ArrayList<Students> sr3 = new ArrayList();
          
         for(Students i : sr3) {
