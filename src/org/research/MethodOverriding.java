@@ -10,6 +10,8 @@ public class MethodOverriding { //This is the example of Method Overriding/ RUnt
 		Samsung sam = new Samsung();
 		//sam.getContacts(new ArrayList());
 		
+		sam.setVersionName("ss");
+		
 		
 	}	
 	
