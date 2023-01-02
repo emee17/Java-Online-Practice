@@ -145,12 +145,12 @@ public class ListExample {
          System.out.println(lh);
          
          
-//         List<String> intList = Arrays.asList("Tony","Sam","Bruce","Andy");
-//         
-//         
-//         Collections.sort(intList);
+         List<String> intList = Arrays.asList("Tony","Bruce","Sam","Andy");
          
-        // intList.forEach(i->System.out.println(i));
+         
+         Collections.sort(intList);
+         
+        intList.forEach(i->System.out.println(i));
          
          List<Students> studentList = new ArrayList<>();
          
@@ -159,9 +159,43 @@ public class ListExample {
          studentList.add(new Students(1, 18, "Danish"));
          studentList.add(new Students(4, 20, "Shaikh"));
          
-         //Collections.sort(studentList);
+         Collections.sort(studentList);
          
-         Comparator<Students> comparator = (o1, o2) ->  o1.getLastname().compareTo(o2.getLastname());
+         
+         Comparator<Students> byId = new StudentComparatorForIdClass();
+        		 
+         Collections.sort(studentList, byId);
+         
+         
+         
+//         Comparator<Students> byName = new Comparator<Students>() {
+//
+//			@Override
+//			public int compare(Students o1, Students o2) {
+//			
+//				return o1.getLastname().compareTo(o2.getLastname());
+//			}
+// 	 
+//         };
+         
+//         Comparator<Students> byName = (Students o1, Students o2) -> {
+//
+//				return o1.getLastname().compareTo(o2.getLastname());
+//         };
+         
+         //Comparator<Students> byName = ( o1, o2) -> o1.getLastname().compareTo(o2.getLastname());
+         
+         
+         
+         
+         Collections.sort(studentList, ( o1, o2) -> o1.getLastname().compareTo(o2.getLastname()));
+         
+         
+         Collections.sort(studentList, ( o1, o2) -> o1.getLastname().compareTo(o2.getLastname()));
+         
+         studentList.forEach(System.out::println);
+         
+ 
          
          
          
@@ -233,23 +267,26 @@ public class ListExample {
 //	}
 //	
 //}
-//class StudentComparatorForIdClass implements Comparator<Students> {
-//
-//	@Override
-//	public int compare(Students o1, Students o2) {
-//		
-//		if (o1.getId() == o2.getId())
-//			return 0;
-//		else if (o1.getId() > o2.getId())
-//			return 1;
-//		else
-//			return -1;
-//	}
-//	
-//}
+class StudentComparatorForIdClass implements Comparator<Students> {
+
+	@Override
+	public int compare(Students o1, Students o2) {
+		
+		if (o1.getId() == o2.getId())
+			return 0;
+		else if (o1.getId() > o2.getId())
+			return 1;
+		else
+			return -1;
+	}
+
+	
+	
+}
 
 
-class Students implements Comparable<Students> {
+class Students implements Comparable<Students> 
+{
 	
 	private int id;
 	private int age;
@@ -293,22 +330,34 @@ class Students implements Comparable<Students> {
 	public String toString() {
 		return "Students [id=" + id + ", age=" + age + ", lastname=" + lastname + "]";
 	}
-
+	
 	@Override
 	public int compareTo(Students o) {
 		
-		if (age == o.getAge())
-			return 0;
-		else if (age > o.age)
-			return 1;
-		else
-			return -1;
+		return lastname.compareTo(o.getLastname()); //0 -1 1
 	}
+
+//	@Override
+//	public int compareTo(Students o) {
+//		
+//		if (age == o.getAge())
+//			return 0;
+//		else if (age > o.getAge())
+//			return 1;
+//		else
+//			return -1;
+//	}
 	
 	
 	public void m1() {
 		System.out.println("metho from parent");
 	}
+
+//@Override
+//public int compareTo(Students o) {
+//	// TODO Auto-generated method stub
+//	return 0;
+//}
 	
 	
 	
