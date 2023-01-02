@@ -3,6 +3,7 @@ package org.research;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -58,7 +59,17 @@ public class StreamAPIExample {
         
         Integer integer = ar3.stream().findFirst().get();
         
-        //System.out.println(integer);
+        
+        Integer reduce = ar3.stream().reduce(3, new BinaryOperator<Integer>() {
+
+			@Override
+			public Integer apply(Integer t, Integer u) {
+				
+				return t+u;
+			}
+		});
+        
+        System.out.println("Reduce : "+reduce);
         
         
         List<Integer> collect2 = ar3.stream().limit(5).collect(Collectors.toList());
