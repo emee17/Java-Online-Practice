@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class StreamAPIExample {
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 		
@@ -72,7 +75,7 @@ public class StreamAPIExample {
         System.out.println("Reduce : "+reduce);
         
         
-        List<Integer> collect2 = ar3.stream().limit(5).collect(Collectors.toList());
+        List<Integer> collect2 = ar3.stream().limit(5).toList();
         
         collect2.forEach(System.out::println);
         
@@ -105,7 +108,7 @@ public class StreamAPIExample {
 				emp.setName("Employee : ".concat(student.getLastname()) );
 				return emp;
 			
-		}).collect(Collectors.toList());
+		}).toList();
         
         
         collect3.forEach(System.out::println);
