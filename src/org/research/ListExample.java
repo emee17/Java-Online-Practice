@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ListExample {
 
@@ -162,6 +165,15 @@ public class ListExample {
          Collections.sort(studentList);
          
          
+         List<Students> collect = studentList.stream().filter(t -> t.getAge() > 17).collect(Collectors.toList());
+         
+         
+         collect.forEach((t) ->{
+				System.out.println("Age greater "+t);
+				
+			}
+		);
+         
          Comparator<Students> byId = new StudentComparatorForIdClass();
         		 
          Collections.sort(studentList, byId);
@@ -267,6 +279,17 @@ public class ListExample {
 //	}
 //	
 //}
+
+
+class studentFilter implements Predicate<Students> {
+
+	@Override
+	public boolean test(Students t) {
+		
+		return t.getAge() > 17;
+	}
+	
+}
 class StudentComparatorForIdClass implements Comparator<Students> {
 
 	@Override
