@@ -6,18 +6,17 @@ public class LooseCouplingExample
 	public static void main(String[] args) {
 		
 		
-		DellLaptop dl = new DellLaptop();
-		
-		dl.setRAM("8 GB");
-		dl.setStorage("200 GB");
+		//DellLaptop dl = new DellLaptop();
 		
 		
-		//IntelProcessor ip = new IntelProcessor();
+		Processor intProc = new IntelProcessor(8,9);
 		
-		ip.setPropertyA(01);
-		ip.setPropertyB(02);
 		
-		dl.setProcessor(ip);
+		DellLaptop dl = new DellLaptop("8GB", "200GB", intProc);
+		
+		
+		
+		
 		
 		System.out.println(dl);
 		
@@ -31,11 +30,18 @@ public class LooseCouplingExample
 		ap.setPropertyA(01);
 		ap.setPropertyB(02);
 		
-		//dl2.setProcessor(ap);
+		dl2.setProcessor(ap);
 		
 		System.out.println(dl2);
 		
+	//IOC contaomer
 		
+		Processor intProc = new IntelProcessor(0, 0);
+		Processor amdProc = new AMDProcessor();
+		
+		
+		
+	//
 		
 		
 		
@@ -57,7 +63,59 @@ class HPLaptop implements Laptop{
 	private String storage;
 	
 	@Autowired
+	private Processor processor;
 	
+	public String getRAM() {
+		return RAM;
+	}
+
+	public void setRAM(String rAM) {
+		RAM = rAM;
+	}
+
+	public String getStorage() {
+		return storage;
+	}
+
+	public void setStorage(String storage) {
+		this.storage = storage;
+	}
+
+	
+
+	public Processor getProcessor() {
+		return processor;
+	}
+	
+	@Autowired
+	public void setProcessor(Processor processor) {
+		this.processor = processor;
+	}
+
+	@Override
+	public String toString() {
+		return "DellLaptop [RAM=" + RAM + ", storage=" + storage + ", Processor=" + processor + "]";
+	}
+}
+
+class DellLaptop{
+	
+	
+	
+	
+	public DellLaptop(String rAM, String storage, Processor processor) {
+		super();
+		RAM = rAM;
+		this.storage = storage;
+		this.processor = processor;
+	}
+	
+	public DellLaptop() {}
+
+	private String RAM;
+	private String storage;
+	
+	//@Autowired
 	private Processor processor;
 	
 	public String getRAM() {
@@ -90,61 +148,28 @@ class HPLaptop implements Laptop{
 	public String toString() {
 		return "DellLaptop [RAM=" + RAM + ", storage=" + storage + ", Processor=" + processor + "]";
 	}
-}
-
-class DellLaptop{
-	
-	
-	private String RAM;
-	private String storage;
-	
-	@Autowired
-	private Processor ip;
-	
-	public String getRAM() {
-		return RAM;
-	}
-
-	public void setRAM(String rAM) {
-		RAM = rAM;
-	}
-
-	public String getStorage() {
-		return storage;
-	}
-
-	public void setStorage(String storage) {
-		this.storage = storage;
-	}
 
 	
-
-	public Processor getProcessor() {
-		return processor;
-	}
-
-	public void setProcessor(Processor processor) {
-		this.processor = processor;
-	}
-
-	@Override
-	public String toString() {
-		return "DellLaptop [RAM=" + RAM + ", storage=" + storage + ", Processor=" + processor + "]";
-	}
-
-	
-	Processor ip = new IntelProcessor();
-	Processor amdProcessor = new AMDProcessor();
 
 }
 
-@Component("ip")
-@Primary
+//@Component("ip")
+//@Primary
 class IntelProcessor implements Processor{
+	
+	
 	
 	private int propertyA;
 	
 	private int propertyB;
+	
+	
+
+	public IntelProcessor(int propertyA, int propertyB) {
+		super();
+		this.propertyA = propertyA;
+		this.propertyB = propertyB;
+	}
 
 	public int getPropertyA() {
 		return propertyA;
@@ -172,7 +197,7 @@ class IntelProcessor implements Processor{
 	
 }
 
-@Component
+//@Component
 class AMDProcessor implements Processor{
 	
 	private int propertyA;
